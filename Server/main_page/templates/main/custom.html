@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('main.static', filename='css/custom.css') }}">
+    
+    <title>Customize Order</title>
+</head>
+<body>
+
+    {% set restName = item_data[1] %}
+    {% set itemName = item_data[2] %}
+    {% set itemDesc = item_data[3] %}
+    {% set subC = item_data[4] %}
+    {% set price = item_data[5] %}
+    {% set direct = restName + "/" + itemName + ".jpeg"  %}
+    {% if isDirect %}
+        {% set linkk = "../main/images/menu/"+ direct %}
+    {% else %}
+        {% set linkk = "../../main/images/menu/"+ direct %}
+    {% endif %}
+        <div class="container"> 
+    {% if isDirect %}
+        <form action="{{ url_for('main.createOrder', itemID=item_data[0]) }}" method="POST"> 
+    {% else %}
+        <form action="{{ url_for('main.createOrder', itemID=item_data[0], instID=instID) }}" method="POST"> 
+    {% endif %}
+            <div class="img-cont">
+                <img class="item-img" src="{{ linkk }}" alt="">
+            </div>
+            
+            <div class="info-div">
+                <h1 class="name">{{ itemName }}</h2>
+                    <hr>
+                <h2 class="sub-des">{{ subC }}</h2>
+                <h2 class="sub-des">{{ itemDesc }}</h2>
+                <br>
+                <h2 class="price">{{ price }} LBP</h2>
+                <br>
+                {% if cLen > 0 %}
+                    <h2 style="margin-bottom: 3px;">Combos</h2>
+                    <hr style="height: 2px; width: 100%; margin-top: 0;">
+                    <div class="combo-container">    
+                        <select name="C" class="combo">
+                        
+                            <option value="-1" class="checkcombo">None</option>
+
+                            {% for id in combos.keys() %}
+                                {% if isDirect %}
+                                    <option value="{{id}}" class="checkcombo"> {{combos[id]}} </option>
+                                {% else %}
+                                    {% if id == FC %}
+                                        <option value="{{id}}" class="checkcombo" selected> {{combos[id]}} </option>
+                                    {% else %}
+                                        <option value="{{id}}" class="checkcombo"> {{combos[id]}} </option>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        
+                        </select>
+                    </div>
+
+                {% endif %}
+
+                <h2 style="margin-bottom: 3px; margin-top: 3rem;">Options you Want to Remove:</h2>
+                <hr style="height: 2px; width: 100%; margin-top: 0;">
+
+                {% for id in options.keys() %}
+                    {% if isDirect %}
+                        <li class="options">{{ options[id] }}<input type="checkbox" name="O{{ loop.index0 }}" value="{{id}}" id="{{id}}" class="option-cb"></li>
+                    {% else %}
+                        {% if id not in FO %}
+                            <li class="options">{{ options[id] }}<input type="checkbox" name="O{{ loop.index0 }}" value="{{id}}" id="{{id}}" class="option-cb"></li>
+                        {% else %}
+                            <li class="options">{{ options[id] }}<input type="checkbox" name="O{{ loop.index0 }}" value="{{id}}" id="{{id}}" class="option-cb" checked></li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                
+                <h2 style="margin-bottom: 3px; margin-top: 3rem;">Special Instructions
+                </h2>
+                <hr style="height: 2px; width: 100%; margin-top: 0;">
+                
+                <div class="textarea-container">
+                    {% if isDirect %}
+                        <textarea name="spec" cols="80" rows="5" style=""></textarea>
+                    {% else %}
+                        <textarea name="spec" cols="80" rows="5" style="">{{ FI }}</textarea>
+                    {% endif %}
+                </div>
+
+            </div>
+            {% if isDirect %}
+                <div class="btn-container">
+                    <button class="ATC-btn">Add To Cart</button>
+                </div>
+            {% else %}
+                <div class="btn-container">
+                    <a class="ATC-btn" href="{{ url_for('main.cart') }}">Cancel</a>
+                    <button class="ATC-btn">Confirm Changes</button>
+
+                </div>
+            {% endif %}
+        </div>
+    </form>
+
+
+
+{% if not isDirect %}
+    <script>
+    </script>
+{% endif %}
+
+
+
+<script type="text/javascript">
+    function checkedOnClick(el){
+
+        // Select all checkboxes by class
+        var checkboxesList = document.getElementsByClassName("checkoption");
+        for (var i = 0; i < checkboxesList.length; i++) {
+            checkboxesList.item(i).checked = false; // Uncheck all checkboxes
+        }
+
+        el.checked = true; // Checked clicked checkbox
+    }
+</script>
+
+</body>
+</html>

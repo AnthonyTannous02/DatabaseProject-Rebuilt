@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('home.static', filename='favicon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('main.static', filename='css/review.css') }}">
+    <title>Review {{name}}</title>
+</head>
+<body>
+    <div class="signup-box">
+       <br> <h1>Review</h1>
+        <h4>We would appreciate your review of {{name}}!</h4><br><br>
+        <form method="POST" action="">
+            <h3>Input your rating</h3>
+            <input type="text" name="rating" id="" placeholder="0~5"><br><br>
+      
+            <h3>Any Additional Comments will be Apprecited:</h3>
+            <input type="text" name="comment" id="" placeholder=""><br><br>
+        
+           
+            <button class="button">Submit Review</button><br><br>
+            <h3>{{ get_flashed_messages()[0] }}</h3>
+       
+      
+        </form>
+      
+      </div>
+
+
+
+</body>
+</html>

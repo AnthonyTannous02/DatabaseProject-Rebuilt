@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="icon" href="{{ url_for('home.static', filename='favicon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('home.static', filename='css/base.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,500&display=swap" rel="stylesheet">
+    
+{% block headcontent %}
+
+{% endblock %}
+</head>
+
+
+
+<body>
+
+    <header>
+        
+        <nav class="navbar">
+            <a href="" class="logo"><i class="fas fa-utensils"></i> DELIVEROU</a>
+        {% block linkss %}
+        {% endblock %}
+
+            {% if current_user.get_id() != None %}
+                <a href="{{ url_for('main.cart') }}" class="nav-links nav-anim"><i class="fa fa-shopping-cart shop-cart"></i> CART</a>
+                <div class="settings" id="setting-div">
+                    <p>
+                        <i class="nav-links acc-name">{{current_user.get_id()}}</i>
+                        <br> <br> <br> <br>
+                        <button class="acc-btn"><a href="{{ url_for('auth.acc_info') }}" class="nav-links acc-links">Account</a></button> <br>
+                        <button class="acc-btn"><a href="{{ url_for('auth.logout') }}" class="nav-links acc-links">Log Out</a></button> 
+                    </p>
+                </div>    
+                <div class="icon icon-border"></div>
+                
+            {% endif %}
+
+        </nav>
+    
+
+    </header>
+
+
+    
+
+
+{% block bodycontent %}
+{% endblock %}
+
+{% block footer %}
+<div class="footer">
+
+    <table class="footer-box-container">
+        <tbody>
+            <tr>
+                <td class="footer-box">
+                        <h3 class="title">Contact Info</h3>
+                        <p> <i class="fas fa-map-marker-alt"></i> Earth </p>
+                        <p> <i class="fas fa-envelope"></i> example@gmail.com  </p>
+                        <p> <i class="fas fa-phone"></i> +123-456-7890  </p>
+                        <p> <i class="fas fa-phone"></i> +111-222-333  </p>
+                </td>
+
+                <td class="footer-box">
+                        <h3 class="title">Branch Location</h3>
+                        <a href="#" class="footer-links">USA</a>
+                        <a href="#" class="footer-links">France</a>
+                        <a href="#" class="footer-links">Russia</a>
+                </td>
+
+                <td class="footer-box">
+                        <h3 class="title">Follow Us</h3>
+                        <a href="#" class="footer-links">Instagram</a>
+                        <a href="#" class="footer-links">Facebook</a>
+                        <a href="#" class="footer-links">Twitter</a>
+                        <a href="#" class="footer-links">Linkedin</a>
+                </td>
+                
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    let icon = document.getElementById('setting-div');
+    
+    
+    $(document).ready( hover_func );
+      function hover_func(){
+        $('.icon, .settings').hover(makeVisible, makeInvisible);
+      }
+
+      function makeVisible() {
+        $(".icon").css("transition-time", "0.3s");
+        $(".icon").css("position", "absolute");
+        $(".icon").css("transform", "scale(1.5)");
+        $(".icon").css("transform-style", "flat");
+        $(".icon").css("top", "1.5rem");
+        $(".icon").css("right", "2.5rem");
+        $(".settings").css("transition-delay", "0.3s");
+        $(".settings").css("visibility", "visible");
+      }
+
+      function makeInvisible() {
+        $(".icon").css("transition-time", "0.3s");
+        $(".icon").css("position", "absolute");
+        $(".icon").css("transform", "scale(1)");
+        $(".icon").css("transform-style", "flat");
+        $(".icon").css("top", "0.25rem");
+        $(".icon").css("right", "0.5rem");
+        $(".settings").css("transition-delay", "0s");
+        $(".settings").css("visibility", "hidden");
+      }
+
+</script>
+
+{% endblock %}
+
+</body>
+</html>
+

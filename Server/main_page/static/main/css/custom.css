@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+
+
+:root {
+    --A : #DD5353;
+    --B: #DBC8AC;
+    --C: #B73E3E;
+    --D: #EDDBC0;
+}
+
+body { 
+    font-family: 'Inter', sans-serif;
+    background-color: var(--C);
+    display: flex;
+    justify-content: center;
+    font-size: 110%;
+}
+
+.container {
+    background-color: var(--D);
+    width: 60%;
+    border-radius: 2rem;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.img-cont {  
+    width: 35rem;
+    margin: auto;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.item-img {
+    width: 35rem;
+    border: solid;
+    border-color: var(--C);
+    border-radius: 2rem;
+    border-width: 4px;
+}
+
+.info-div{
+    margin: 5%;
+}
+
+.name {
+    margin-top: 6rem;
+    text-align: center;
+}
+
+hr {
+    border: none;
+    height: 3px;
+    background-color: black;
+    width: 75%;
+}
+
+.sub-des{
+    text-align: center;
+}
+
+.price {
+    text-align: center;
+    border: solid;
+    border-radius: 2rem;
+    border-color: var(--C);
+}
+
+.combo-container {
+    display: flex;
+    justify-content: center;
+}
+
+.combo{
+    text-align: center;
+    margin: auto;
+    width: 75%;
+    height: 1.6rem;
+    font-size: 100%;
+}
+
+.checkcombo{
+    position: relative;
+    top: 0.3rem;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.options{
+    margin: 1rem;
+}
+
+.option-cb{
+    position: relative;
+    top: 0.3rem;
+    left: 0.5rem;
+    width: 1.4rem;
+    height: 1.4rem;
+}
+
+.textarea-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.btn-container{
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+    margin-bottom: 4rem;
+}
+
+.ATC-btn{
+    font-size: 110%;
+    width: 11rem;
+    height: 3.5rem;
+    background-color: var(--C);
+    color: var(--D);
+    border-color: var(--D);
+    border-radius: 1rem;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    transition-duration: 0.4s;
+}
+
+.ATC-btn:hover {
+    transition-duration: 0.4s;
+    border-color: var(--C);
+    background-color: var(--D);
+    color: var(--C);
+    box-shadow: 0 15px 16px 0 rgba(0,0,0,0.4), 0 19px 50px 0 rgba(0,0,0,0.19);
+}
+
+a.ATC-btn {
+    border-width: 2px;
+    border-style:solid;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border-width: 2px;
+    border-style: outset;
+    border-image: initial;
+}

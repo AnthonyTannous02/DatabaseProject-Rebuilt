@@ -1,0 +1,69 @@
+
+{% extends "base.html" %}
+
+
+{% block headcontent %}
+    <title>Restaurants</title>
+        <!-- custom css file link  -->
+    <link rel="stylesheet" href="main/css/rest.css">
+    <link rel="icon" href="{{ url_for('home.static', filename='favicon.png') }}">
+
+{% endblock %}
+
+
+
+
+{% block linkss %}
+    <a class="nav-links nav-anim" href="{{ url_for('home.index') }}">HOME</a>
+{% if current_user.get_id() == None %}
+    <a class="nav-links nav-anim" href="{{ url_for('auth.acc', setting='login') }}">LOGIN</a>
+    <a class="nav-links nav-anim" href="{{ url_for('auth.acc', setting='signup') }}">SIGNUP</a>
+{% endif %}
+    <a class="nav-links nav-anim" href="{{ url_for('main.rest') }}">RESTAURANTS</a>
+{% endblock %}
+
+{% block bodycontent %}
+    <div class="box-container">
+
+        {% for a in rest_dict %}
+            {% set location = "" + url_for('main.menu', name=a) %}
+
+                <div class="rest-box" id="{{ loop.index0 }}" data-aos="fade-right">
+                    <div class="img-container">
+                        
+                            <img class='rest-img' src="main/images/rest/{{ a }}.png" alt="">
+                            
+                    </div>  
+                        <h3 class="rest-h3" id="{{a}}">{{ a }}</h3>
+
+                        <div class="star-ratings">
+                            {% set value = rest_dict[a] * 20 %}
+                            <div class="empty-ratings">
+                                <span class="empty-star" style="font-size: 200%; color: #ede03f;">&star;&star;&star;&star;&star;</span>
+                            </div>
+                            <div class="fill-ratings" style="width: {{value}}%">
+                                <span style="font-size: 200%; color: #ede03f;">&starf;&starf;&starf;&starf;&starf;</span>
+                            </div>
+
+                        </div>
+                        <div class="rev-container" id="rev-{{ loop.index0 }}">
+                            <a href="{{ url_for('main.check_review', name=a) }}"><button class="rest-btn">Review</button></a>
+                        </div>
+                    
+                        
+                </div>  
+        {% endfor %}
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+        let restBoxList = document.querySelectorAll(".rest-box");
+        restBoxList.forEach((element) => {
+        element.addEventListener('click', function() {
+            window.location.assign("/main/menu/" + element.getElementsByTagName("h3")[0].id);
+        })});
+
+    </script>
+
+{% endblock %}

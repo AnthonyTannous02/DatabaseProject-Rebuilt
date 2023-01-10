@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+
+
+{% block headcontent %}
+    <link rel="icon" href="{{ url_for('home.static', filename='favicon.png') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="home/css/index.css"> 
+    <title>Home Page</title>
+
+
+
+{% endblock %}
+
+
+
+    
+{% block linkss %}
+<a class="nav-links nav-anim" href="{{ url_for('home.index') }}">HOME</a>
+
+    {% if current_user.get_id() == None %}
+        <a class="nav-links nav-anim" href="{{ url_for('auth.acc', setting='login') }}">LOGIN</a>
+        <a class="nav-links nav-anim" href="{{ url_for('auth.acc', setting='signup') }}">SIGNUP</a>
+    {% endif %}
+
+<a class="nav-links nav-anim" href="{{ url_for('main.rest') }}">RESTAURANTS</a>
+<a class="nav-links nav-anim instructions" href="#howitworks">INSTRUCTIONS</a>
+{% endblock %}
+    
+
+
+{% block bodycontent %}
+<div id="sf-container">
+    <div id="screen-filler">
+                
+                    
+            <div style="padding-top: 27vh;">
+                <div class="content">
+                    
+                    <h3>Order Food From Anywhere</h3>
+                    <p>The Best Choices, Right Here, Right Now!</p>
+                        
+                </div>
+                    
+                <a href="{{ order_link }}"><button class="order-btn ob-action">Order Now</button></a>
+                    
+
+
+                <div class="image">
+                    <img src="home/images/home-img.png" alt="">
+                </div>
+            </div>
+    </div>   
+</div>
+
+    <section class="section instruction" id="howitworks" aria-labelledby="">
+        <div class="container">
+            <h2 class="h2 section-title" id="instruction-label" data-reveal>
+                How It Works
+            </h2>
+
+            <ul class="grid-list">
+                <li>
+                    <div class="instruction-card">
+
+                        <div class="card-content">
+                            <h3 class="card-title">
+                                <span class="span">01</span>
+                                Select Restaurant
+                            </h3>
+                        </div>
+                        <p class="card-text">
+                            Choose the Restaurant you Prefer Ordering from.
+                        </p>
+
+                    </div>
+                </li>
+
+                <li>
+                    <div class="instruction-card">
+
+                        <div class="card-content">
+                            <h3 class="card-title">
+                                <span class="span">02</span>
+                                Select Items
+                            </h3>
+                        </div>
+                        <p class="card-text">
+                            Select the Items you Desire. You can Choose Items from Several Restaurants in a Single Order.
+
+                        </p>
+
+                    </div>
+                    
+                </li>
+
+                <li>
+                    <div class="instruction-card">
+
+                        <div class="card-content">
+                            <h3 class="card-title">
+                                <span class="span">03</span>
+                                Confirm your Order, Enjoy the Food and Review our Restaurants!
+                            </h3>
+                        </div>
+                        <p class="card-text">
+                            Confirm your Order by Selecting your Method of Payment, Enjoy the Food Cooked by our Collection of Carefully Picked Restaurants
+                            and Review the Restaurants you Ordered from to Inform the World of your Experience.
+
+                        </p>
+
+                    </div>
+                    
+                </li>
+
+            </ul>
+
+        </div>
+
+    </section>
+
+    
+    <script src="home/js/script.js"></script>
+
+{% endblock %}
+
+
+</body>
+</html>

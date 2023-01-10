@@ -1,0 +1,124 @@
+
+:root{
+    --A : #DD5353;
+    --B: #DBC8AC;
+    --C: #B73E3E;
+    --D: #EDDBC0;
+}
+
+.box-container{
+    margin: auto;
+    width: 80%;
+    margin-top: 7rem;
+    margin-bottom: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    gap: 4rem 7rem;
+}
+
+
+
+.rest-box{
+    background-color: var(--C);
+    width: 16rem;
+    height: 19rem;
+    display: inline-block;
+    padding-bottom: 1rem;
+    text-align: center;
+    border-radius: 3rem;
+    max-width: 16rem;
+    max-height: 19rem;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+}
+
+.rest-box:hover{
+    transform: scale(1.015);
+    transition-duration: 0.2s;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 30px 40px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+.rest-img{
+    width: 11rem;
+    border-radius: 1rem;
+}
+
+.rest-h3{
+    margin-top: 1rem;
+    margin-bottom: 0.2rem;
+}
+
+.img-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 11rem;
+    height: 11rem;
+    margin: auto;
+    margin-top: 1rem;
+}
+
+.star-ratings {
+    position: relative;
+    width: 186.59px;
+    height: 59px;
+    margin: auto;
+    padding: 0;
+    display: block;
+    text-align: center;
+}
+
+.star-rating span {
+    display: inline-block;
+}
+
+.empty-ratings {
+    padding: 0;
+    display: block;
+    position: absolute;
+}
+
+.fill-ratings {
+    padding: 0;
+    position: absolute;
+    display: block;
+    overflow: hidden;
+}
+
+.rest-btn{
+    font-size: 75%;
+    margin: 1.2rem;
+    width: 6rem;
+    height: 2.5rem;
+    background-color: var(--A);
+    color: var(--D);
+    border-width: 3px;
+    border-radius: 1rem;
+    border-color: white;
+    cursor: pointer;
+}
+
+.rev-container{
+    background-color: var(--A);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 15rem;
+    width: 10rem;
+    height: 4rem;
+    margin: auto;
+    transform: translateZ(-10px);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    transition-duration: 0.5s;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+
+.rest-box:hover .rev-container{
+    transition-duration: 0.5s;
+    top: 19rem;
+}

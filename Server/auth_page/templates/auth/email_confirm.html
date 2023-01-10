@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="icon" href="{{ url_for('home.static', filename='favicon.png') }}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h3>Send Your Verification Code By Pressing on the Botton Below (Only one Code Allowed every 2 Minutes)</h3>
+        <h4>Your Email: '{{ inpEmail }}'</h4>
+        <form action="{{ url_for('auth.emailconf', email=inpEmail) }}" method="POST">
+            <input type="text" name="confCode">
+            
+            <button>Confirm</button>
+        </form>
+        <form action="{{ url_for('auth.emailconf', email=inpEmail) }}", method="POST">
+            <button name="sendcode" type="submit" value=true>Send Code</button>
+        </form>
+    </div>
+
+<script type="text/javascript">
+    var btn = document.getElementById("sendcode")
+
+    btn.addEventListener("click", myFunction);
+
+    function myFunction() {
+        btn.disabled = true;
+        setTimeout(()=>{
+          btn.disabled = false;
+          console.log('Button Activated')}, 120000)
+      };
+
+</script>
+
+
+</body>
+</html>

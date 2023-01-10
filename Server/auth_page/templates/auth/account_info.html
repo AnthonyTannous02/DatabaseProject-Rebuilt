@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('auth.static', filename='css/account_info.css') }}">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="name">
+        <h3 class="username">{{ user_info[0] }}</h3>
+        <hr class="underline">
+    </div>
+    
+    <div class="info">
+        <form action="{{ url_for('auth.config') }}" method="POST">
+                <div class="input-container">
+                    <h3>First Name</h3>
+                    <input type="text" name="fName" value="{{ user_info[1] }}">
+                </div>
+
+                <div class="input-container">
+                    <h3>Last Name</h3>
+                    <input type="text" name="lName" value="{{ user_info[2] }}">
+                </div>
+
+                <div class="input-container">
+                    <h3>City</h3>
+                    <input type="text" name="city" value="{{ user_info[3] }}">
+                </div>
+
+                <div class="input-container">
+                    <h3>Street</h3>
+                    <input type="text" name="strt" value="{{ user_info[4] }}">
+                </div>
+
+                <div class="input-container">
+                    <h3>Region</h3>
+                    <input type="text" name="reg" value="{{ user_info[5] }}">
+                </div>
+
+                <div class="input-container">
+                    <h3>Building</h3>
+                    <input type="text" name="bld" value="{{ user_info[6] }}">
+                </div>
+
+                <div class="input-container">
+                    <h3>Floor</h3>
+                    <input type="text" name="flr" value="{{ user_info[7] }}">
+                </div>
+
+                <div class="input-container">
+                    <h3>Additional Information</h3>
+                    <input type="text" name="notes" value="{{ user_info[8] }}">
+                </div>
+        </form>    
+    </div>
+</body>
+</html>

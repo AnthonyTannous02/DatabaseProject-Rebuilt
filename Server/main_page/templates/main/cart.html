@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block headcontent %}
+  <link rel="stylesheet" href="{{ url_for('main.static', filename='css/cart.css') }}">
+  <title>Cart</title>
+{% endblock %}
+
+{% block linkss %}
+<a class="nav-links nav-anim" href="{{ url_for('home.index') }}">HOME</a>
+<a class="nav-links nav-anim" href="{{ url_for('main.rest') }}">RESTAURANTS</a>
+
+{% endblock %}
+
+{% block bodycontent %}
+  <div class="table-container">
+    <div class="table">
+        <div class="item-container head">
+          <div class="data id">#</div>
+          <div class="data item">ITEM</div>
+          <div class="data rest">RESTAURANT</div>
+          <div class="data price">ITEM PRICE</div>
+          <div class="data instructions" style="word-break: normal;">SPECIAL INSTRUCTIONS</div>
+          <div class="data combI">COMBO ITEM</div>
+          <div class="data combP">COMBO PRICE</div>
+          <div class="data rem">REMOVED OPTIONS</div>
+          <div class="data tip">TOTAL ITEM PRICE</div>
+        </div>
+      
+        <div class="items">
+
+          {% if not isEmpty %}
+                {% for key in keys %}
+                        
+                    <div class="item-container cbody" id="{{ order_info[key][0][4] }}-{{ key }}" onclick="openModal(this, this.id)">
+                      <div class="data id">{{loop.index}}</div>
+                      <div class="data item">{{ order_info[key][0][0] }}</div>
+                      <div class="data rest">{{ order_info[key][0][1] }}</div>
+                      <div class="data price">{{ order_info[key][0][2] }}</div>
+                      <div class="data instructions">
+                      
+                          {{ order_info[key][0][3] }}
+
+                      </div>
+                      
+                      
+                      <div class="combocont">
+                        
+                          {% for cItem, cPrice in order_info[key][1] %}
+                            
+                              <div class="data combI">{{cItem}}</div>
+                            
+                          {% endfor %}
+                        
+                      </div>
+                      
+                      
+                      <div class="mult-cont">
+                          {% for cItem, cPrice in order_info[key][1] %}
+
+                              <div class="data combP">{{cPrice}}</div>
+
+                          {% endfor %}
+                      </div>
+                    
+                      <div class="options-table">
+                          {% for option in order_info[key][2] %}
+
+                            <div class="data rem">{{option}}</div>
+
+                          {% endfor %}
+
+                      </div>
+
+                      <div class="data tip">
+                        {{ order_info[key][3] }}
+                      </div>
+                </div>
+                {% endfor %}
+            {% else %}
+              <div class="msg-container">
+                <div class="empty-msg">
+                  <h3>Your Order is Currently Empty!</h3>
+                  <p>Please make sure to go into "RESTAURANTS" and choose the restaurant you want to order from.
+                    To add the item to your cart, make sure to click on the item then click "Add To Cart" after choosing your item customizations </p>
+                </div>
+              </div>
+            {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="fees">
+    <p>
+      Delivery Fee: {{ fee }}
+    </p>
+
+    <h3>
+      Total Price: {{ TP }}
+    </h3>
+  </div>
+ 
+  <div class="confirm">
+    <button class="confirm-btn btn-anim" onclick="sendReq('confirm')">Confirm Order</button>
+  </div>
+
+  <div class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div>
+        <h4 id="item-id"></h4>
+      </div>
+      <div class="form">
+        <form action="{{ url_for('main.cart') }}" method="POST">
+          <input class="modal-btn" type="button" name="edit" value="Edit Item" onclick="sendReq('edit')">
+          <input class="modal-btn" type="button" name="remove" value="Remove Item" onclick="sendReq('remove')">
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="{{ url_for('main.static', filename='js/cart.js') }}"></script>
+  <script>
+
+  </script>
+
+{% endblock %}

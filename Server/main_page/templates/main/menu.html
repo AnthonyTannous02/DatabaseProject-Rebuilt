@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block headcontent %}
+    <title>Restaurant</title>
+    <link rel="shortcut icon" href="images/barbecue.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('main.static', filename='css/menu.css') }}">
+    <link rel="icon" href="{{ url_for('home.static', filename='favicon.png') }}">
+{% endblock %}
+
+{% block linkss %}
+<a class="nav-links nav-anim" href="{{ url_for('home.index') }}">HOME</a>
+
+    {% if current_user.get_id() == None %}
+        <a class="nav-links nav-anim" href="{{ url_for('auth.acc', setting='login') }}">LOGIN</a>
+        <a class="nav-links nav-anim" href="{{ url_for('auth.acc', setting='signup') }}">SIGNUP</a>
+    {% endif %}
+
+<a class="nav-links nav-anim" href="{{ url_for('main.rest') }}">RESTAURANTS</a>
+{% endblock %}
+
+
+
+{% block bodycontent %}
+    <div class="container">
+        <div class="title">
+            <h2>{{ name }}</h2>
+        </div>
+        
+        <div class="content">
+            <div class="list">
+                {% if list_size > 1 %}
+                    <li class="subCat" data-color=".All">All</li>
+                {% endif %}
+
+                {% for subC in subC_list %}
+                    <li class="subCat" data-color=".{{subC}}">{{subC}}</li>
+                {% endfor %}
+
+            </div>
+
+            <div class="box_flex">
+
+                {% for key in item_dict.keys() %}
+                    {% set restName = item_dict[key][4] %}
+                    {% set itemName = item_dict[key][0] %}
+                    {% set direct = restName + "/" + itemName + ".jpeg"  %}
+                    {% set linkk = "../main/images/menu/"+ direct %}
+                    <div class="box All {{item_dict[key][2]}}">
+                        <div class="box-info">
+                            <div class="box_img">
+                                <img src="{{ linkk }}" alt="">
+                            </div>
+                        
+                            <div class="text">
+                                <h3 style="margin-bottom: 0.5rem;" id="{{key}}">{{ itemName }}</h3>
+                                <hr style="background-color: black; height: 2px; border: none;">
+                                <section>{{item_dict[key][3]}} LBP</section>
+                                <br>
+                                <article>Description:<br> {{item_dict[key][1]}}</article>
+
+                            </div>
+                            
+                        </div>
+                                         
+                    </div>
+
+
+                    
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="Modal-Container"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="{{ url_for('main.static', filename='js/menu.js') }}"></script>
+
+{% endblock %}
+
+
+

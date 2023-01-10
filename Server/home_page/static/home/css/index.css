@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+:root{
+  --A : #DD5353;
+  --B: #DBC8AC;
+  --C: #B73E3E;
+  --D: #EDDBC0;
+}
+
+#screen-filler{
+
+  background: linear-gradient(rgba(46, 2, 2, 0.23), rgba(142, 7, 7, 0.23)), url('../images/test.jpeg');
+  
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  text-align: center;
+  height: 100vh;
+}
+
+.content{
+  text-align: center;
+  position: relative;
+  margin-top: 0;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  color: var(--D);
+  backdrop-filter: blur(20px);
+  font-size: 110%;
+ 
+}
+
+#sf-container{
+  position: relative;
+  top: 0;
+}
+
+.order-btn{
+  position: relative;
+  top: 2rem;
+  min-width: 11rem;
+  min-height: 3.5rem;
+  font-size: 110%;
+  border-radius: 20px;
+  background-color: var(--C);
+  color: var(--D);
+  border: none;
+}
+
+.ob-action{
+  transition-duration: 0.4s;
+}
+
+.ob-action:hover{
+  background-color: var(--D);
+  color: var(--C);
+  box-shadow: 0 15px 16px 0 rgba(0,0,0,0.4), 0 19px 50px 0 rgba(0,0,0,0.19);
+}
+
+.instruction{
+  background-color: var(--B);
+  padding: 0px 0px 20px 0px;
+}
+
+.instruction-card{
+  margin:auto;
+  max-width: 60%
+}
+
+#instruction-label{
+  font-size: 200%;
+  margin-top: 0;
+  text-align: center;
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+}
+
+.card-banner{
+  padding-top: 4rem;
+  text-align: center;
+}
+
+.grid-list{
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.card-title{
+  text-align: center;
+}
+
+.card-text{
+  text-align: center;
+  padding-bottom: 4rem;
+}
+
+.span{
+  font-family: 'Roboto Mono', monospace;
+}
