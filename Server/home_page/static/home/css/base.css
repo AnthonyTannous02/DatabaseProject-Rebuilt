@@ -80,6 +80,10 @@ body{
   font-size: 130%;
 }
 
+.user-container {
+  
+}
+
 .icon{
   display: inline-flex;
   position: absolute;

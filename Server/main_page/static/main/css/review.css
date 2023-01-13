@@ -1,10 +1,32 @@
-.signup-box{
-    width: 360px;
-    height: 630px;
-    margin: auto;
-    background-color: rgb(255, 90,0);
-    border-radius: 10px;
+:root{
+    --A : #DD5353;
+    --B: #DBC8AC;
+    --C: #B73E3E;
+    --D: #EDDBC0;
+}
 
+body{
+    background-color: var(--D);
+}
+
+.box-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.box{
+    width: 40%;
+    height: 80vh;
+    margin: auto;
+    background-color: var(--C);
+    border-radius: 1rem;
+    box-shadow: 0 15px 16px 0 rgba(0,0,0,0.4), 0 19px 50px 0 rgba(0,0,0,0.19);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1rem;
 }
 
 
@@ -29,28 +51,22 @@ h4{
    
     text-align: center ;
     font-weight: bolder;
-    color:#ffffff;
+    color: black;
 } 
 
-form{
-    width: 300px;
-    margin-left: 20px;
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-form label {
-    display:flex ;
-    margin-top: 20px;
-    font-size: 18px;
-    color:rgb(0, 0, 0) ;
-}
-
-form input{
-    width: 100%;
-    padding: 7px;
-    border: none;
-    border: 1px solid gray;
-    border-radius: 6px;
-    outline:  none;
+input {
+    width: 60%;
+    height: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 15px 16px 0 rgba(0,0,0,0.4), 0 19px 50px 0 rgba(0,0,0,0.19);
+    
 }
 
 .button

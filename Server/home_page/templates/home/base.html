@@ -30,16 +30,17 @@
 
             {% if current_user.get_id() != None %}
                 <a href="{{ url_for('main.cart') }}" class="nav-links nav-anim"><i class="fa fa-shopping-cart shop-cart"></i> CART</a>
-                <div class="settings" id="setting-div">
-                    <p>
-                        <i class="nav-links acc-name">{{current_user.get_id()}}</i>
-                        <br> <br> <br> <br>
-                        <button class="acc-btn"><a href="{{ url_for('auth.acc_info') }}" class="nav-links acc-links">Account</a></button> <br>
-                        <button class="acc-btn"><a href="{{ url_for('auth.logout') }}" class="nav-links acc-links">Log Out</a></button> 
-                    </p>
-                </div>    
-                <div class="icon icon-border"></div>
-                
+                <div class="user-container">
+                    <div class="settings" id="setting-div">
+                        <p>
+                            <i class="nav-links acc-name">{{current_user.get_id()}}</i>
+                            <br> <br> <br> <br>
+                            <button class="acc-btn"><a href="{{ url_for('auth.acc_info') }}" class="nav-links acc-links">Account</a></button> <br>
+                            <button class="acc-btn"><a href="{{ url_for('auth.logout') }}" class="nav-links acc-links">Log Out</a></button> 
+                        </p>
+                    </div>    
+                    <div class="icon icon-border"></div>
+                </div>
             {% endif %}
 
         </nav>

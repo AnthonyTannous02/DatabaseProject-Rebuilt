@@ -5,57 +5,145 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('auth.static', filename='css/account_info.css') }}">
-    <title>Document</title>
+    <title>Information</title>
 </head>
 <body>
 
-    <div class="name">
-        <h3 class="username">{{ user_info[0] }}</h3>
-        <hr class="underline">
+    <div class="link-container">
+        <a href="{{ url_for('home.index') }}" class="home-btn" id="anch">Home</a>
+        <li class="list-cont" style="list-style: none;">
+            <ul class="home-btn" id="acc">Account</ul>
+            <ul class="home-btn" id="cus">Customer</ul>
+            <ul class="home-btn" id="his">Order History</ul>
+        </li>
+
     </div>
-    
-    <div class="info">
-        <form action="{{ url_for('auth.config') }}" method="POST">
+
+    <div class="acc-container container1">
+        <h3>Account Information</h3>
+        <hr class="underline">
+            <div>
+                <div class="input-container acc">
+                    <h3>User Name</h3>
+                    <input class="textarea2" type="text" name="userN" value="{{ user_info[0] }}" readonly>
+                </div>
+
+                <div class="input-container acc">
+                    <h3>Email</h3>
+                    <input class="textarea2" type="text" name="email" value="{{ acc_info[0] }}" readonly>
+                </div>
+
+                <form action="{{ url_for('auth.acc_info') }}" method="POST">
+                    <div class="input-container acc">
+                        <h3>Phone Number</h3>
+                        <input class="textarea2 editable" type="text" name="phoneNb" value="{{ acc_info[1] }}" readonly>
+                    </div>
+
+                    <div class="btn-container">
+                        <button type="button" class="btn postedit2">Cancel</button>
+                        <button type="button" class="btn postedit2" onclick="sendReq('acc_edit')">Submit</button>
+                        <button type="button" class="btn edit2">Edit Phone</button>
+                    </div>
+
+                </form> 
+
+            </div>     
+    </div>
+
+    <div class="info container2">
+        <h3>Customer Information</h3>
+        <hr class="underline">
+        <form action="{{ url_for('auth.acc_info') }}" method="POST">
                 <div class="input-container">
                     <h3>First Name</h3>
-                    <input type="text" name="fName" value="{{ user_info[1] }}">
+                    <input class="textarea" type="text" name="fName" value="{{ user_info[1] }}" readonly>
                 </div>
 
                 <div class="input-container">
                     <h3>Last Name</h3>
-                    <input type="text" name="lName" value="{{ user_info[2] }}">
+                    <input class="textarea" type="text" name="lName" value="{{ user_info[2] }}" readonly>
                 </div>
 
                 <div class="input-container">
                     <h3>City</h3>
-                    <input type="text" name="city" value="{{ user_info[3] }}">
+                    <input class="textarea" type="text" name="city" value="{{ user_info[3] }}" readonly>
                 </div>
 
                 <div class="input-container">
                     <h3>Street</h3>
-                    <input type="text" name="strt" value="{{ user_info[4] }}">
+                    <input class="textarea" type="text" name="strt" value="{{ user_info[4] }}" readonly>
                 </div>
 
                 <div class="input-container">
                     <h3>Region</h3>
-                    <input type="text" name="reg" value="{{ user_info[5] }}">
+                    <input class="textarea" type="text" name="reg" value="{{ user_info[5] }}" readonly>
                 </div>
 
                 <div class="input-container">
                     <h3>Building</h3>
-                    <input type="text" name="bld" value="{{ user_info[6] }}">
+                    <input class="textarea" type="text" name="bld" value="{{ user_info[6] }}" readonly>
                 </div>
 
                 <div class="input-container">
                     <h3>Floor</h3>
-                    <input type="text" name="flr" value="{{ user_info[7] }}">
+                    <input class="textarea" type="text" name="flr" value="{{ user_info[7] }}" readonly>
                 </div>
 
                 <div class="input-container">
                     <h3>Additional Information</h3>
-                    <input type="text" name="notes" value="{{ user_info[8] }}">
+                    <input class="textarea" type="text" name="notes" value="{{ user_info[8] }}" readonly>
+                </div>
+
+                <div class="btn-container">
+                    <button type="button" class="btn postedit">Cancel</button>
+                    <button type="button" class="btn postedit" onclick="sendReq('user_edit')">Submit</button>  
+                    <button type="button" class="btn edit">Edit Info</button>
                 </div>
         </form>    
     </div>
+
+
+
+    <div class="table-container container3">
+        <h3>Order History</h3>
+        <hr class="underline">
+        <div class="table">
+
+            <div class="item-container head">
+                <div class="data id">ID</div>
+                <div class="data date">ORDER DATE</div>
+                <div class="data time">ORDER TIME</div>
+                <div class="data atime">ARRIVAL TIME</div>
+                <div class="data dname">DRIVER NAME</div>
+                <div class="data dnb">DRIVER NB</div>
+                <div class="data tf">TOTAL FEE</div>
+            </div>
+            
+              <div class="items">
+                {% if order_hist != None %}
+                      {% for order in order_hist %}
+                              
+                        <div class="item-container cbody" id="{{ order[0] }}" 
+                        destination="{{ url_for('main.past_order', order_id = order[0]) }}" 
+                        onclick="location.href = this.getAttribute('destination');">
+                            <div class="data id">{{ order[0] }}</div>
+                            <div class="data date">{{ order[1] }}</div>
+                            <div class="data time">{{ order[2] }}</div>
+                            <div class="data atime">{{ order[3] }}</div>
+                            <div class="data dname">{{ order[4] }}</div>  
+                            <div class="data dnb">{{ order[5] }}</div>
+                            <div class="data tf">{{ order[6] }}</div>
+                        </div>
+                      {% endfor %}
+                {% endif %}
+            </div>
+                
+        </div>
+    </div>
+
+
+<script src="{{ url_for('auth.static', filename='js/account_info.js') }}"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 </body>
 </html>

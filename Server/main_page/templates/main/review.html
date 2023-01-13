@@ -9,25 +9,26 @@
     <title>Review {{name}}</title>
 </head>
 <body>
-    <div class="signup-box">
-       <br> <h1>Review</h1>
-        <h4>We would appreciate your review of {{name}}!</h4><br><br>
-        <form method="POST" action="">
-            <h3>Input your rating</h3>
-            <input type="text" name="rating" id="" placeholder="0~5"><br><br>
-      
-            <h3>Any Additional Comments will be Apprecited:</h3>
-            <input type="text" name="comment" id="" placeholder=""><br><br>
+    <div class="box-container">
+        <div class="box">
+        <br> <h1>Review</h1>
+            <h4>We would appreciate your review of {{name}}!</h4><br><br>
+            <form method="POST" action="">
+                <h3>Input your rating</h3>
+                <input type="text" name="rating" id="" placeholder="0~5"><br><br>
         
-           
-            <button class="button">Submit Review</button><br><br>
-            <h3>{{ get_flashed_messages()[0] }}</h3>
-       
+                <h3>Any Additional Comments will be Apprecited:</h3>
+                <input type="textarea" name="comment" id="" placeholder=""><br><br>
+            
+            
+                <button class="button">Submit Review</button><br><br>
+                <h3>{{ get_flashed_messages()[0] }}</h3>
+        
+        
+            </form>
       
-        </form>
-      
-      </div>
-
+        </div>
+    </div>
 
 
 </body>

@@ -1,10 +1,10 @@
-from flask import render_template, request, redirect, url_for, session
+from flask import get_flashed_messages, render_template, request, redirect, url_for, session, flash
 from werkzeug import exceptions
 from auth_page import bp
 from database import Database, QueryContainer, User 
 from auth_page.email_conf import genCode, sendCode
 from flask_login import login_required, login_user, logout_user, current_user
-from dataLoader import check_first_login, fetch_user_info
+from dataLoader import check_first_login, fetch_user_info, update_user_info, fetch_acc_info, fetch_order_hist
 
 qC = QueryContainer()
 
@@ -142,12 +142,12 @@ def emailconf(email):
                 print(e)
                 session.pop("OTP")
                 return "Wrong Code"
-            
-            
+    
         else:
             # If none Are Pressed And Something unexpected Happens
             session.pop("OTP")
             return "Can't Signup"
+
 
 @bp.route('/config', methods=["GET", "POST"])
 @login_required
@@ -182,11 +182,39 @@ def config():
 @bp.route('/account_information', methods=['GET', 'POST'])
 @login_required
 def acc_info():
-    user_id = current_user.get_id()
+    if request.method == 'GET':
+        user_id = current_user.get_id()
+        
+        acc_info = fetch_acc_info(Database(), user_id)
+        user_info = fetch_user_info(Database(), user_id)
+        order_hist = fetch_order_hist(Database(), user_id)
+        
+        return render_template('account_info.html', user_info=user_info, 
+                               acc_info=acc_info, order_hist=order_hist)
     
-    user_info = fetch_user_info(Database(), user_id)
-    
-    return render_template('account_info.html', user_info=user_info)
+    elif request.method == 'POST':
+        if request.json['req'] == 'acc_edit': 
+            try:
+                db = Database()
+                con = db.connection
+                cur = con.cursor()
+                
+                cur.execute(f'''   UPDATE ACCOUNTS
+                            SET phoneNumber = {int(request.json['info'][0])}
+                            WHERE accID="{current_user.get_id()}"; ''')
+                con.commit()
+                db.close()
+            except:
+                pass
+            
+            return redirect(url_for('.acc_info'))
+        
+        elif request.json['req'] == 'user_edit':
+            user_id = current_user.get_id()
+            update_user_info(Database(), user_id, request.json['info'])
+            
+            return redirect(url_for('.acc_info')) 
+
 
 
 @bp.route('/redirect')

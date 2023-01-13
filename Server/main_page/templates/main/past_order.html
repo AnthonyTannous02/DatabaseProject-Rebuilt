@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block headcontent %}
+  <link rel="stylesheet" href="{{ url_for('main.static', filename='css/cart.css') }}">
+  <title>Cart</title>
+{% endblock %}
+
+{% block linkss %}
+<a class="nav-links nav-anim" href="{{ url_for('home.index') }}">HOME</a>
+<a class="nav-links nav-anim" href="{{ url_for('main.rest') }}">RESTAURANTS</a>
+
+{% endblock %}
+
+{% block bodycontent %}
+  <div class="table-container">
+    <div class="table">
+        <div class="item-container head">
+          <div class="data id">#</div>
+          <div class="data item">ITEM</div>
+          <div class="data rest">RESTAURANT</div>
+          <div class="data price">ITEM PRICE</div>
+          <div class="data instructions" style="word-break: normal;">SPECIAL INSTRUCTIONS</div>
+          <div class="data combI">COMBO ITEM</div>
+          <div class="data combP">COMBO PRICE</div>
+          <div class="data rem">REMOVED OPTIONS</div>
+          <div class="data tip">TOTAL ITEM PRICE</div>
+        </div>
+      
+        <div class="items">
+        {% for key in keys %}
+                    
+                <div class="item-container cbody" id="{{ order_info[key][0][4] }}-{{ key }}">
+                    <div class="data id">{{loop.index}}</div>
+                    <div class="data item">{{ order_info[key][0][0] }}</div>
+                    <div class="data rest">{{ order_info[key][0][1] }}</div>
+                    <div class="data price">{{ order_info[key][0][2] }}</div>
+                    <div class="data instructions">
+                    
+                        {{ order_info[key][0][3] }}
+
+                    </div>
+                    
+                    
+                    <div class="combocont">
+                    
+                        {% for cItem, cPrice in order_info[key][1] %}
+                        
+                            <div class="data combI">{{cItem}}</div>
+                        
+                        {% endfor %}
+                    
+                    </div>
+                    
+                    
+                    <div class="mult-cont">
+                        {% for cItem, cPrice in order_info[key][1] %}
+
+                            <div class="data combP">{{cPrice}}</div>
+
+                        {% endfor %}
+                    </div>
+                
+                    <div class="options-table">
+                        {% for option in order_info[key][2] %}
+
+                        <div class="data rem">{{option}}</div>
+
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="data tip">
+                    {{ order_info[key][3] }}
+                    </div>
+            </div>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+
+  <div class="fees">
+    <p>
+      Delivery Fee: {{ fee }}
+    </p>
+
+    <h3>
+      Total Price: {{ TP }}
+    </h3>
+  </div>
+
+
+{% endblock %}

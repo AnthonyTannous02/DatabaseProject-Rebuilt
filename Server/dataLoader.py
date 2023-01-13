@@ -14,6 +14,23 @@ def check_first_login(db, userID):
     return False
 
 
+def fetch_acc_info(db, user_id):
+    con = db.connection
+    cur = con.cursor()
+    
+    cur.execute(f'''   SELECT email, phoneNumber FROM ACCOUNTS
+                   WHERE accID="{user_id}" ''')
+    
+    fetched = cur.fetchall()[0]
+    acc_info = []
+    
+    for item in fetched:
+        acc_info.append(item)
+
+    db.close()
+    return acc_info
+
+
 def fetch_user_info(db, user_id):
     con = db.connection
     cur = con.cursor()
@@ -30,6 +47,70 @@ def fetch_user_info(db, user_id):
     db.close()
     return user_info
 
+
+def update_user_info(db, user_id, user_info):
+    db = Database('test1')
+    con = db.connection
+    cur = con.cursor()
+    
+    cur.execute(f''' UPDATE CUSTOMER
+                SET firstName = "{user_info[0]}", lastName = "{user_info[1]}", city = "{user_info[2]}", street = "{user_info[3]}", 
+                region = "{user_info[4]}", building = "{user_info[5]}", floor = "{user_info[6]}", notes = "{user_info[7]}"
+                WHERE userName = "{user_id}"; ''')
+    con.commit()
+    
+    db.close()
+    
+    return
+
+
+def fetch_order_hist(db, user_id):
+    db = Database('test1')
+    con = db.connection
+    cur = con.cursor()
+    
+    cur.execute(f''' SELECT O.orderID, orderDate, orderTime, arrivalTime, firstName, lastName, phoneNumber
+                FROM TEST1.ORDER O, DRIVER D WHERE O.driverID = D.driverID AND userName = "{user_id}"
+                ORDER BY orderDate DESC; ''')
+    
+    fetched = cur.fetchall()
+    
+    if len(fetched) == 0:
+        return None
+    
+    order_hist = []
+    order_ids = []
+    
+    for oID, oDate, oTime, aTime, fN, lN, pN in fetched:
+        order_hist.append([oID, str(oDate), str(oTime), str(aTime), fN + " " + lN, pN])
+        order_ids.append(oID)
+    
+    cur.reset()
+    index = 0
+    for id in order_ids:
+        cur.execute(f''' SELECT I.itemID, INS.instID, I.price, SUM(CM.price), O.delivFee 
+                    FROM test1.ORDER O NATURAL JOIN test1.CONTAINS C NATURAL JOIN INSTRUCTIONS INS
+                    NATURAL JOIN COMBO CM, ITEM I
+                    WHERE I.itemID = C.itemID AND orderID = {id}
+                    GROUP BY I.itemID, INS.instID; ''')
+    
+        fetched = cur.fetchall()
+        if len(fetched) == 0:
+            continue
+        
+        totalFee = 0
+        for iID, instID, iPrice, cPrice, dFee in fetched:
+            totalFee = totalFee + iPrice + int(cPrice)
+        
+        totalFee = totalFee + fetched[0][4]
+        
+        order_hist[index].append(int(totalFee))
+        
+        cur.reset()
+        index = index + 1
+    
+    db.close()
+    return order_hist
 
 
 def load_rest(db):
@@ -187,7 +268,7 @@ def create_order(db, userID):
     X = int(cur.fetchall()[0][0])
     
     cur.reset()
-    cur.execute(f'''INSERT INTO test1.ORDER VALUES ( {X+1} , '{userID}', NULL, NULL, 30000, NULL, NULL )''')
+    cur.execute(f'''INSERT INTO test1.ORDER VALUES ( {X+1} , '{userID}', NULL, NULL, 30000, NULL, NULL, NULL )''')
     con.commit()
     db.close()
     return X+1
@@ -321,7 +402,7 @@ def get_filled_info(db, item_id, order_id, inst_id):
     return cust_info
 
 
-def close_order(db, order_id):
+def close_order(db, order_id, totalPrice):
     con = db.connection
     cur = con.cursor()
 
@@ -342,7 +423,7 @@ def close_order(db, order_id):
     cur.reset()
 
     cur.execute(f''' UPDATE test1.ORDER 
-                SET orderTime = CURRENT_TIME(), driverID = {driver_id}, orderDate = CURRENT_DATE()
+                SET orderTime = CURRENT_TIME(), driverID = {driver_id}, orderDate = CURRENT_DATE(), totalFee = {totalPrice}
                 WHERE orderID = {order_id}''')
     con.commit()
     

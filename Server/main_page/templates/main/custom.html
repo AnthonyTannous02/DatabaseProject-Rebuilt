@@ -64,21 +64,23 @@
 
                 {% endif %}
 
-                <h2 style="margin-bottom: 3px; margin-top: 3rem;">Options you Want to Remove:</h2>
-                <hr style="height: 2px; width: 100%; margin-top: 0;">
+                {% if oLen != 0 %}
+                    <h2 style="margin-bottom: 3px; margin-top: 3rem;">Options you Want to Remove:</h2>
+                    <hr style="height: 2px; width: 100%; margin-top: 0;">
 
-                {% for id in options.keys() %}
-                    {% if isDirect %}
-                        <li class="options">{{ options[id] }}<input type="checkbox" name="O{{ loop.index0 }}" value="{{id}}" id="{{id}}" class="option-cb"></li>
-                    {% else %}
-                        {% if id not in FO %}
-                            <li class="options">{{ options[id] }}<input type="checkbox" name="O{{ loop.index0 }}" value="{{id}}" id="{{id}}" class="option-cb"></li>
-                        {% else %}
-                            <li class="options">{{ options[id] }}<input type="checkbox" name="O{{ loop.index0 }}" value="{{id}}" id="{{id}}" class="option-cb" checked></li>
-                        {% endif %}
-                    {% endif %}
-                {% endfor %}
-                
+                    
+                        {% for id in options.keys() %}
+                            {% if isDirect %}
+                                <li class="options">{{ options[id] }}<input type="checkbox" name="O{{ loop.index0 }}" value="{{id}}" id="{{id}}" class="option-cb"></li>
+                            {% else %}
+                                {% if id not in FO %}
+                                    <li class="options">{{ options[id] }}<input type="checkbox" name="O{{ loop.index0 }}" value="{{id}}" id="{{id}}" class="option-cb"></li>
+                                {% else %}
+                                    <li class="options">{{ options[id] }}<input type="checkbox" name="O{{ loop.index0 }}" value="{{id}}" id="{{id}}" class="option-cb" checked></li>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                {% endif %}
                 <h2 style="margin-bottom: 3px; margin-top: 3rem;">Special Instructions
                 </h2>
                 <hr style="height: 2px; width: 100%; margin-top: 0;">

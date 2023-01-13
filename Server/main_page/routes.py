@@ -81,7 +81,7 @@ def cart():
     order_id = fetch_unfinished_order(Database(), id)
     
     if order_id == None:
-        return "No orders Available"
+        order_id = create_order(Database(), current_user.get_id())
     
 
     
@@ -108,10 +108,10 @@ def cart():
         order_info[key].append(total_item_price)
         TP = TP + total_item_price
     
-    TP = "{:,}".format(TP + fee) + ' LBP'    
+    TPs = "{:,}".format(TP + fee) + ' LBP'    
         
     if request.method == "GET":     
-        return render_template('cart.html', isEmpty=False, order_info=order_info, fee=fee, keys=keys, TP=TP)
+        return render_template('cart.html', isEmpty=False, order_info=order_info, fee=fee, keys=keys, TP=TPs)
     
     elif request.method == "POST":
         if request.json['req'] == 'remove':
@@ -122,10 +122,33 @@ def cart():
             return redirect(url_for('main.custom', itemID=request.json['itemID']))
         
         elif request.json['req'] == 'confirm':
-            close_order(Database(), order_id)
+            close_order(Database(), order_id, TP+fee)
             return redirect(url_for('home.index'))
         
+       
+@bp.route('/order/<order_id>') 
+def past_order(order_id):
+    order_info = get_order_info(Database(), order_id)
+    fee = order_info.pop('fee')
+    keys = list(order_info.keys())
+    list.sort(keys)
+    
+    TP = 0
+    
+    for key in keys:
+        total_item_price = 0
+        item_price = int(order_info[key][0][2])
+        combo_price = 0
+        for subC, cPrice in order_info[key][1]:
+            combo_price = combo_price + cPrice
         
+        total_item_price = total_item_price + item_price + combo_price
+        order_info[key].append(total_item_price)
+        TP = TP + total_item_price
+    
+    TPs = "{:,}".format(TP + fee) + ' LBP' 
+    
+    return render_template('past_order.html', order_info = order_info, keys=keys, fee=fee, TP = TPs)
 
 
 
@@ -173,7 +196,7 @@ def custom(itemID, instID=None):
     
     if instID is None:
         return render_template('custom.html', item_data=items, options=options, combos=combos, 
-                               cLen = len(combos), isDirect=True)
+                               cLen = len(combos), oLen = len(options), isDirect=True)
     
     else:
         id = current_user.get_id()
@@ -181,7 +204,7 @@ def custom(itemID, instID=None):
         order_id = fetch_unfinished_order(Database(), id)
         
         if order_id == None:
-            return "No orders Available"
+            order_id = create_order(Database(), current_user.get_id())
         
         
         filled_customization = get_filled_info(Database(), itemID ,order_id, instID)
@@ -209,7 +232,6 @@ def custom(itemID, instID=None):
 @login_required
 def red_custom(itemID, instID):
 
-    
     return redirect(url_for('main.custom', itemID=itemID, instID=instID))
 
 
