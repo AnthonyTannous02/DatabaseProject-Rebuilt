@@ -53,7 +53,7 @@ cancelBtn2.addEventListener("click", () => {
 
 // Submitting Information
 
-var data = [];
+let data = [];
 
 function sendReq(reqType) {
     if (reqType === "acc_edit"){

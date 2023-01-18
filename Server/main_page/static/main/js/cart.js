@@ -1,10 +1,10 @@
-var modal = document.getElementsByClassName('modal')[0];
-var title = document.getElementById("item-id");
-var span = document.getElementsByClassName("close")[0];
-var form = document.getElementsByTagName('form')[0];
-var btn = document.getElementsByClassName('confirm-btn')[0];
-var ids = [];
-var item = null;
+let modal = document.getElementsByClassName('modal')[0];
+let title = document.getElementById("item-id");
+let span = document.getElementsByClassName("close")[0];
+let form = document.getElementsByTagName('form')[0];
+let btn = document.getElementsByClassName('confirm-btn')[0];
+let ids = [];
+let item = null;
 
 
 function openModal(element, str) {
