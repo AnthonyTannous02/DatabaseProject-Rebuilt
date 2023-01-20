@@ -21,7 +21,7 @@ I used the following tools to create the Website "Deliverou":
   - Javascript (including jQuery and AJAX)
 
 !important: In order for this website to work properly on your local machine, it is highly recommended that you run the following command in the terminal of
-your project: pip install -r requirements.txt
+your project: ***pip install -r requirements.txt***
 
 The Website was divided into three sections:
   - home_page (It was used mainly for the home page. It included the navbar and footer that were implemented inside base.html and extended using Jinja2 to avoid
@@ -33,13 +33,13 @@ The Website was divided into three sections:
  
 The Sections are mainly split into parts as shown below:
   - static
-    -- name of section
-      --- css
-      --- js
-      --- images
+    - name of section
+      - css
+      - js
+      - images
       
   - templates (contains the html files)
-    -- name of section
+    - name of section
   
   - __init__.py (configures the sections as packages and builds the blueprints)
   - routes.py (contains the route configurations)
