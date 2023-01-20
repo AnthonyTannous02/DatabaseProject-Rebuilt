@@ -53,6 +53,7 @@ Next, in order to run this code you must own the MySQL Server Software (preferab
 
 After running, make sure no errors were thrown and comment back what was commented at first. 
 Finally, run the *mainApp.py*, if everything runs fine, the following message should be shown (or something similar at least) and you can accessing the site by using **Ctrl + Left Click** on the link:
+
 ![image](https://user-images.githubusercontent.com/118010036/213802923-50a79170-b3db-4659-964b-9c7b7f3def68.png)
 
 Enjoy!
