@@ -1,6 +1,6 @@
 # DatabaseProject-Rebuilt
 
-# Origin Story
+## Origin Story
 the Fall semester of 2022 was when I took the Database Systems Course. Fall 2022 was one of my hardest semesters yet. However, despite all the disappointments
 and hardship, I refused to concede and came out victorious.
 
@@ -12,7 +12,7 @@ while I was having my winter break. After considering all my options, I chose to
 To achieve my goal, I went ahead and deleted everything that my project partners built (front-end, DB) in order to respect their work and fully implement 
 my vision of the website.
 
-# Code Structure
+## Code Structure
 I used the following tools to create the Website "Deliverou":
   - MySQL (Workbench and Server)
   - Python and Flask
@@ -49,7 +49,7 @@ As for the files found outside the sections mentioned, they are as follows:
   - database.py (includes classes and objects that were used to facilitate the connection process between MySQL and Flask)
   - dataLoader.py (includes 90% of the queries used in the applications, it was created to minimize the wasted and redundant lines used in the routes.py files)
 
-# How to Run
+## How to Run
 
 
 ![Screenshot 2023-01-20 223026](https://user-images.githubusercontent.com/118010036/213799963-2ae158e9-427c-4451-8d74-6150080dc4a5.jpg)
