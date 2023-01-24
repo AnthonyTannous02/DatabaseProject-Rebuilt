@@ -5,7 +5,7 @@ the Fall semester of 2022 was when I took the Database Systems Course. Fall 2022
 and hardship, I refused to concede and came out victorious.
 
 Long Story Short, The DB Systems course required us to create a Website that was to be implemented using the MySQL DBMS with any languages we needed.
-Personally, I chose back-end and contributed to most of the Database design (which I beleive is still not as perfect as I thought it would be).
+Personally, I chose back-end and contributed to most of the Database design (which I believe is still not as perfect as I thought it would be).
 I used the Flask Python Framework as I was already familiar with Python. After the semester ended, I knew I wanted to be productive and create a website
 while I was having my winter break. After considering all my options, I chose to rebuild the DB project the way I envisioned it.
 
