@@ -225,7 +225,7 @@ def signup():
 @login_required
 def logout():
     logout_user()
-    return redirect(request.referrer)
+    return redirect(url_for('home.index'))
     
     
 
