@@ -116,7 +116,7 @@ def cart():
     elif request.method == "POST":
         if request.json['req'] == 'remove':
             delete_record(Database(), request.json['instID'])
-            return redirect(url_for('cart.html'))
+            return redirect(url_for('main.cart'))
 
         elif request.json['req'] == 'edit':         
             return redirect(url_for('main.custom', itemID=request.json['itemID']))
